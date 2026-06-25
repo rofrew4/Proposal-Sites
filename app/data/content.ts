@@ -24,7 +24,7 @@ export const roadmapItems: RoadmapItem[] = [
       "Flags conflicts on the spot, with the exact line item and the exact mismatch.",
     ],
     whyItMatters:
-      'This is the "domestic rail" problem Victor walked us through. A plan revision happens, the BOM never gets updated, the warehouse pulls the wrong inverter, and the installer\'s on a roof with the wrong product.',
+      'This is the "domestic rail" problem Steve walked us through. A plan revision happens, the BOM never gets updated, the warehouse pulls the wrong inverter, and the installer\'s on a roof with the wrong product.',
     scopeNote:
       "Low if the plan parses cleanly and the BOM pulls easily from the PISA API. Higher if either gets messy.",
   },
@@ -66,11 +66,11 @@ export const roadmapItems: RoadmapItem[] = [
     title: "Safety Plan Generator",
     scope: "LOW–MED",
     whatItIs:
-      "A browser-automation tool that fills out the third-party safety plan form Victor does ~100×/month, end-to-end.",
+      "A browser-automation tool that fills out the third-party safety plan form Steve does ~100×/month, end-to-end.",
     whatItDoes:
       "Pulls the project address from PISA, opens the safety plan portal, picks the closest hospital and fire department, completes the form, downloads the PDF.",
     whyItMatters:
-      "Five-minute task done a hundred times a month — roughly 8 hours of Victor's time back, every month. This is also our wedge for standing up reusable browser-automation tooling that the permitting projects downstream will need.",
+      "Five-minute task done a hundred times a month — roughly 8 hours of Steve's time back, every month. This is also our wedge for standing up reusable browser-automation tooling that the permitting projects downstream will need.",
   },
   {
     id: "17-point-inspection-scoring",
@@ -93,11 +93,11 @@ export const roadmapItems: RoadmapItem[] = [
     title: "Permit Form Auto-Fill",
     scope: "MED–HIGH",
     whatItIs:
-      "A tool that parses the plan set and auto-fills the jurisdiction portal forms Victor fills out manually today. Victor reviews and submits.",
+      "A tool that parses the plan set and auto-fills the jurisdiction portal forms Steve fills out manually today. Steve reviews and submits.",
     whatItDoes: [
       "Reads the plan set from Fluent and pulls the structured fields: system size, panel count, inverter model, mounting type, service panel info, jurisdiction-specific cover-page data.",
       "Opens the relevant jurisdiction portal (Henderson, Clark County, North Las Vegas, etc.) and fills the form.",
-      "Stops at upload-and-submit. Victor reviews and submits.",
+      "Stops at upload-and-submit. Steve reviews and submits.",
     ],
     whyItMatters:
       "Steve said this is 50–80% of his day on busy days. The complexity is multi-jurisdiction sprawl, which we layer in jurisdiction-by-jurisdiction as ROI proves out.",
@@ -108,7 +108,7 @@ export const roadmapItems: RoadmapItem[] = [
     title: "Permit Status Monitoring",
     scope: "MED–HIGH",
     whatItIs:
-      "One combined notifier that watches every jurisdiction portal Sol-Up submits to and pings Victor when status changes — instead of Victor logging into each portal every day.",
+      "One combined notifier that watches every jurisdiction portal Sol-Up submits to and pings Steve when status changes — instead of Steve logging into each portal every day.",
     whatItDoes:
       "Pulls signals from multiple sources (email notifications when they fire, daily portal scrapers when they don't, custom webhooks where available, a simple refresh otherwise) and routes status changes into one feed tied to the PISA permit record.",
     whyItMatters:
@@ -122,11 +122,11 @@ export const roadmapItems: RoadmapItem[] = [
     title: "Complex SolarAPP+ Form Auto-Fill",
     scope: "HIGH",
     whatItIs:
-      "The ~41-page form Victor walked us through, which needs values read off the electrical drawing — not just lifted from text.",
+      "The ~41-page form Steve walked us through, which needs values read off the electrical drawing — not just lifted from text.",
     whatItDoes:
       "If the design files have a text backend, parse values directly. Otherwise vision-parse the diagram, with the model citing the cropped source region next to each extracted value so human review is fast.",
     whyItMatters:
-      "This is the form that takes Victor 30 minutes per submission today. Big time savings if it works.",
+      "This is the form that takes Steve 30 minutes per submission today. Big time savings if it works.",
     scopeNote: "Drops to Med if a text backend exists. High if vision-only.",
   },
   {
