@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getProposalPassword, getProposalSlug } from "@/lib/proposal";
 
 const AUTH_COOKIE = "proposal-auth";
 
@@ -12,7 +13,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 
-  const expected = process.env.PROPOSAL_PASSWORD ?? "solup";
+  const slug = getProposalSlug();
+  const expected = getProposalPassword(slug);
 
   if (password !== expected) {
     return NextResponse.json({ error: "Incorrect password" }, { status: 401 });

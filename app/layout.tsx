@@ -4,9 +4,6 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Sol-Up Engineering Roadmap · Chesterbrook",
-  description:
-    "A phased engineering roadmap for Sol-Up. Eight builds. Start with one. Ship in weeks.",
   robots: "noindex, nofollow",
 };
 

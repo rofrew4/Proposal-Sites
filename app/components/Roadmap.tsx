@@ -1,4 +1,4 @@
-import { roadmapItems } from "../data/content";
+import type { RoadmapItem } from "@/proposals/types";
 import { DetailBlock } from "./DetailBlock";
 import { ExpandableRow } from "./ExpandableRow";
 import { FadeIn } from "./FadeIn";
@@ -60,14 +60,14 @@ function RoadmapRowHeader({
   );
 }
 
-export function Roadmap() {
+export function Roadmap({ items }: { items: RoadmapItem[] }) {
   return (
     <section id="roadmap" className="doc-section">
       <h2 className="doc-h2">The Roadmap</h2>
       <ScopeKey />
 
       <div className="divide-y divide-accent/10 rounded-lg border border-accent/20 bg-widget shadow-card">
-        {roadmapItems.map((item) => (
+        {items.map((item) => (
           <FadeIn key={item.id}>
             <ExpandableRow
               id={item.id}

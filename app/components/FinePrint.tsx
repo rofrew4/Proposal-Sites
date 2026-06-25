@@ -1,8 +1,10 @@
-import { finePrintItems } from "../data/content";
+import { buildFinePrint } from "@/proposals/shared";
 import { ExpandableRow } from "./ExpandableRow";
 import { FadeIn } from "./FadeIn";
 
-export function FinePrint() {
+export function FinePrint({ clientName }: { clientName: string }) {
+  const finePrintItems = buildFinePrint(clientName);
+
   return (
     <section className="doc-section">
       <h2 className="doc-h2">The Fine Print</h2>
