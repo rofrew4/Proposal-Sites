@@ -5,15 +5,16 @@ import { FadeIn } from "./FadeIn";
 
 function scopeColorClass(scope: string): string {
   const s = scope.toUpperCase().replace(/\u2013/g, "-");
-  if (s.includes("HIGH") && !s.startsWith("LOW")) return "text-scope-high";
-  if (s.includes("LOW") || s === "MED") return "text-scope-low";
+  if (s.startsWith("LOW")) return "text-scope-low";
+  if (s === "MED" || s === "MED-HIGH") return "text-scope-med";
+  if (s === "HIGH") return "text-scope-high";
   return "text-scope-low";
 }
 
 function ScopeKey() {
   const items = [
     { label: "Low", hours: "20+ hrs", color: "text-scope-low" },
-    { label: "Med", hours: "35+ hrs", color: "text-scope-low" },
+    { label: "Med", hours: "35+ hrs", color: "text-scope-med" },
     { label: "High", hours: "50+ hrs", color: "text-scope-high" },
   ] as const;
 
