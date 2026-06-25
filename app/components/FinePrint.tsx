@@ -21,7 +21,7 @@ export function FinePrint() {
                 </div>
               }
             >
-              <p className="prose-body px-4 pb-4">{item.body}</p>
+              <p className="prose-body px-4 pb-2 pt-1">{item.body}</p>
             </ExpandableRow>
           </FadeIn>
         ))}

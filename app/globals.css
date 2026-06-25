@@ -54,10 +54,6 @@
     line-height: 1;
   }
 
-  .hero-rule {
-    @apply mt-4 h-0.5 w-12 bg-accent;
-  }
-
   .btn-primary {
     @apply inline-block rounded-full bg-accent px-5 py-2.5 text-[14px] font-medium text-white transition-colors duration-300 hover:bg-accent-dark;
   }
@@ -131,11 +127,11 @@
   }
 
   .expandable-row--compact .row-body {
-    @apply pb-4 pt-1;
+    @apply pb-2 pt-3;
   }
 
   .expandable-row--roadmap .row-body {
-    @apply pb-5 pt-1;
+    @apply pb-2 pt-3;
   }
 
   @media (prefers-reduced-motion: reduce) {

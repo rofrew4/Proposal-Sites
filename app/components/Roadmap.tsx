@@ -4,16 +4,16 @@ import { ExpandableRow } from "./ExpandableRow";
 import { FadeIn } from "./FadeIn";
 
 function scopeColorClass(scope: string): string {
-  const s = scope.toUpperCase();
+  const s = scope.toUpperCase().replace(/\u2013/g, "-");
   if (s.includes("HIGH") && !s.startsWith("LOW")) return "text-scope-high";
-  if (s.includes("MED")) return "text-scope-med";
+  if (s.includes("LOW") || s === "MED") return "text-scope-low";
   return "text-scope-low";
 }
 
 function ScopeKey() {
   const items = [
     { label: "Low", hours: "20+ hrs", color: "text-scope-low" },
-    { label: "Med", hours: "35+ hrs", color: "text-scope-med" },
+    { label: "Med", hours: "35+ hrs", color: "text-scope-low" },
     { label: "High", hours: "50+ hrs", color: "text-scope-high" },
   ] as const;
 
@@ -80,7 +80,7 @@ export function Roadmap() {
                 />
               }
             >
-            <div className="px-4 pb-4 md:pl-[4.25rem] md:pr-5">
+            <div className="px-4 pb-2 pt-1 md:pl-[4.25rem] md:pr-5">
               <DetailBlock label="What it is">{item.whatItIs}</DetailBlock>
 
               {Array.isArray(item.whatItDoes) && item.whatItDoes.length > 0 ? (
