@@ -41,7 +41,7 @@ export function LoginForm() {
     <main className="flex min-h-screen items-center justify-center px-6 py-12">
       <div className="w-full max-w-sm rounded-lg border border-accent/20 bg-widget p-8 shadow-card">
         <p className="eyebrow mb-3">Chesterbrook</p>
-        <h1 className="font-display text-[22px] font-semibold tracking-[-0.02em] text-foreground">
+        <h1 className="text-[22px] font-semibold tracking-[-0.02em] text-foreground">
           Sol-Up Engineering Roadmap
         </h1>
         <p className="prose-body mt-2">Enter the password to view this proposal.</p>

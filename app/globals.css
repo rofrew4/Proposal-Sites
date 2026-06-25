@@ -21,10 +21,6 @@
     @apply bg-background font-sans text-foreground antialiased;
   }
 
-  .font-display {
-    font-variation-settings: "WONK" 0, "SOFT" 100;
-  }
-
   ::selection {
     @apply bg-accent/15 text-foreground;
   }
@@ -32,7 +28,7 @@
 
 @layer components {
   .eyebrow {
-    @apply font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-accent;
+    @apply font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-accent;
   }
 
   .prose-body {
@@ -48,12 +44,10 @@
   }
 
   .doc-h2 {
-    @apply mb-4 font-display text-[22px] font-semibold leading-tight tracking-[-0.02em] text-accent;
-    font-weight: 600;
+    @apply mb-4 text-[22px] font-semibold leading-tight tracking-[-0.02em] text-accent;
   }
 
   .hero-title {
-    @apply font-display;
     font-size: clamp(32px, 5vw, 48px);
     font-weight: 600;
     letter-spacing: -0.03em;
