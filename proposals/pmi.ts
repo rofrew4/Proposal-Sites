@@ -154,6 +154,6 @@ export const pmi: Proposal = {
     "Managed-communities roster. Can your team export the communities you manage (name, address, assigned manager)?",
     "Reputation scope. How many distinct communities are we monitoring? Do you want scattered single-family homes included (address-level, often no review listing, low signal) or just the multifamily and affordable communities?",
     "Target markets. Which PA markets/counties matter most?",
-    "Yardi exports. Can your Yardi instance schedule report exports to SFTP/CSV, and which reports cover the operational and financial data you'd want to query? Gates Project 2.",
+    "Yardi exports. Can your Yardi instance schedule report exports to SFTP/CSV, and which reports cover the operational and financial data you'd want to query?",
   ],
 };

@@ -26,7 +26,7 @@ export const howWeWork = [
   },
   {
     title: "Optional retainer",
-    body: "Once projects are live, most clients want a lightweight monthly retainer to keep things humming. Small fixes, jurisdictions that change their forms, HOAs that update their guidelines, platform updates that break an integration. Fully optional. We don't put it in place at the start, and we don't put it in place at all if you don't want one.",
+    body: "Once projects are live, most clients want a lightweight monthly retainer to keep things humming. Small fixes, jurisdictions that change their forms, platform updates that break an integration. Fully optional. We don't put it in place at the start, and we don't put it in place at all if you don't want one.",
   },
 ];
 

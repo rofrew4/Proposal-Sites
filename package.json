@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:halpern": "PROPOSAL_SLUG=halpern next dev",
     "dev:pmi": "PROPOSAL_SLUG=pmi next dev",
     "dev:solup": "PROPOSAL_SLUG=solup next dev",
     "build": "next build",

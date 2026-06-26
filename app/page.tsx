@@ -10,7 +10,9 @@ import { NextSteps } from "./components/NextSteps";
 import { OnTheRadar } from "./components/OnTheRadar";
 import { OpenQuestions } from "./components/OpenQuestions";
 import { Overview } from "./components/Overview";
+import { Phase1Section } from "./components/Phase1Section";
 import { Roadmap } from "./components/Roadmap";
+import { WorkflowRoadmap } from "./components/WorkflowRoadmap";
 import { WhoWeAre } from "./components/WhoWeAre";
 import { getProposal } from "@/lib/proposal";
 
@@ -42,8 +44,21 @@ export default function Home() {
         <Overview paragraphs={proposal.overview} />
       </FadeIn>
       <FadeIn>
-        <Roadmap items={proposal.roadmapItems} />
+        {proposal.workflow ? (
+          <WorkflowRoadmap
+            title={proposal.workflow.title}
+            steps={proposal.workflow.steps}
+            afterSteps={proposal.workflow.afterSteps}
+          />
+        ) : (
+          <Roadmap items={proposal.roadmapItems ?? []} />
+        )}
       </FadeIn>
+      {proposal.workflow && (
+        <FadeIn>
+          <Phase1Section content={proposal.workflow.phase1} />
+        </FadeIn>
+      )}
       {proposal.onTheRadar && proposal.onTheRadar.length > 0 && (
         <FadeIn>
           <OnTheRadar items={proposal.onTheRadar} />

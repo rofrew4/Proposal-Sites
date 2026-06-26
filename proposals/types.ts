@@ -27,6 +27,29 @@ export type OverviewParagraph =
   | string
   | { bold: string; text: string };
 
+export interface WorkflowStep {
+  id: string;
+  title: string;
+  today: string;
+  automated: string;
+}
+
+export interface Phase1Proposal {
+  intro: string[];
+  discovery: { bold: string; text: string };
+  mvpTitle: string;
+  mvpBullets: string[];
+  closing: string[];
+  costNote?: string;
+}
+
+export interface WorkflowSection {
+  title: string;
+  steps: WorkflowStep[];
+  afterSteps?: OverviewParagraph;
+  phase1: Phase1Proposal;
+}
+
 export interface Proposal {
   slug: string;
   password: string;
@@ -43,7 +66,8 @@ export interface Proposal {
     chesterbrookTeam: string;
   };
   overview: OverviewParagraph[];
-  roadmapItems: RoadmapItem[];
+  roadmapItems?: RoadmapItem[];
+  workflow?: WorkflowSection;
   onTheRadar?: { title: string; body: string }[];
   openQuestions?: string[];
   nextSteps?: string[];
