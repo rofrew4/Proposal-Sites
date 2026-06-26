@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 export function LoginForm({
@@ -10,7 +10,6 @@ export function LoginForm({
   title: string;
   clientName: string;
 }) {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -35,8 +34,7 @@ export function LoginForm({
       }
 
       const from = searchParams.get("from") || "/";
-      router.push(from);
-      router.refresh();
+      window.location.assign(from);
     } catch {
       setError("Something went wrong. Try again.");
       setLoading(false);
