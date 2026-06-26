@@ -5,7 +5,8 @@
  * 1. Duplicate this file as `proposals/<slug>.ts` (e.g. `proposals/inlight.ts`)
  * 2. Paste proposal content into the fields below
  * 3. Register it in `proposals/registry.ts`
- * 4. Deploy with subdomain `<slug>.chesterbrookai.com`
+ * 4. Set `PROPOSAL_SLUG=<slug>` in `.env.local` (copy from `.env.example`)
+ * 5. Deploy with subdomain `<slug>.chesterbrookai.com`
  *
  * Shared sections (Who We Are, How We Work, Optional Retainer, Fine Print)
  * are automatic — only edit the fields in this file.
@@ -36,12 +37,21 @@ export const template: Proposal = {
       id: "project-01",
       number: "01",
       title: "Project Title",
-      scope: "LOW–MED",
+      scope: "LOW-MED",
       whatItIs: "One-sentence summary.",
       whatItDoes: ["Bullet one.", "Bullet two."],
       whyItMatters: "Why this project matters to the client.",
       scopeNote: "Optional scope note.",
     },
+  ],
+  onTheRadar: [
+    {
+      title: "Future opportunity",
+      body: "Brief description of something worth watching but not scoped yet.",
+    },
+  ],
+  openQuestions: [
+    "First open question before final numbers.",
   ],
   nextSteps: [
     "Client picks which project to start.",

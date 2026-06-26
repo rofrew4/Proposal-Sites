@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { DevProposalBanner } from "./components/DevProposalBanner";
 import { DontGetOverwhelmed } from "./components/DontGetOverwhelmed";
 import { FadeIn } from "./components/FadeIn";
 import { FinePrint } from "./components/FinePrint";
@@ -6,7 +7,8 @@ import { Footer } from "./components/Footer";
 import { Hero } from "./components/Hero";
 import { HowWeWork } from "./components/HowWeWork";
 import { NextSteps } from "./components/NextSteps";
-import { OptionalRetainer } from "./components/OptionalRetainer";
+import { OnTheRadar } from "./components/OnTheRadar";
+import { OpenQuestions } from "./components/OpenQuestions";
 import { Overview } from "./components/Overview";
 import { Roadmap } from "./components/Roadmap";
 import { WhoWeAre } from "./components/WhoWeAre";
@@ -21,11 +23,15 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   const proposal = getProposal();
 
   return (
-    <main className="doc">
+    <>
+      <DevProposalBanner />
+      <main className="doc">
       <FadeIn>
         <Hero proposal={proposal} />
       </FadeIn>
@@ -36,26 +42,38 @@ export default function Home() {
         <Overview paragraphs={proposal.overview} />
       </FadeIn>
       <FadeIn>
-        <HowWeWork />
-      </FadeIn>
-      <FadeIn>
         <Roadmap items={proposal.roadmapItems} />
       </FadeIn>
+      {proposal.onTheRadar && proposal.onTheRadar.length > 0 && (
+        <FadeIn>
+          <OnTheRadar items={proposal.onTheRadar} />
+        </FadeIn>
+      )}
+      {proposal.openQuestions && proposal.openQuestions.length > 0 && (
+        <FadeIn>
+          <OpenQuestions items={proposal.openQuestions} />
+        </FadeIn>
+      )}
       <FadeIn>
-        <DontGetOverwhelmed body={proposal.dontGetOverwhelmed} />
+        <HowWeWork />
       </FadeIn>
-      <FadeIn>
-        <OptionalRetainer />
-      </FadeIn>
+      {proposal.dontGetOverwhelmed && (
+        <FadeIn>
+          <DontGetOverwhelmed body={proposal.dontGetOverwhelmed} />
+        </FadeIn>
+      )}
       <FadeIn>
         <FinePrint clientName={proposal.hero.clientName} />
       </FadeIn>
-      <FadeIn>
-        <NextSteps steps={proposal.nextSteps} />
-      </FadeIn>
+      {proposal.nextSteps && proposal.nextSteps.length > 0 && (
+        <FadeIn>
+          <NextSteps steps={proposal.nextSteps} />
+        </FadeIn>
+      )}
       <FadeIn>
         <Footer />
       </FadeIn>
     </main>
+    </>
   );
 }

@@ -4,7 +4,7 @@ export function HowWeWork() {
   return (
     <section className="doc-section">
       <h2 className="doc-h2">How We Work</h2>
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-6">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
         {howWeWork.map((item) => (
           <div
             key={item.title}

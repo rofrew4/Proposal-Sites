@@ -19,8 +19,8 @@ const config: Config = {
         surface: "rgb(var(--surface) / <alpha-value>)",
         "surface-border": "rgb(var(--surface-border) / <alpha-value>)",
         "scope-low": "#3D6B4F",
-        "scope-med": "#7B1E3A",
-        "scope-high": "#B45309",
+        "scope-med": "#CA8A04",
+        "scope-high": "#B91C1C",
       },
       fontFamily: {
         sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],

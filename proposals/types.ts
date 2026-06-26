@@ -1,11 +1,18 @@
+export interface RoadmapPhase {
+  label: string;
+  scope: string;
+  description: string | string[];
+}
+
 export interface RoadmapItem {
   id: string;
   number: string;
   title: string;
-  scope: string;
+  scope?: string;
   whatItIs: string;
   whatItDoes: string | string[];
   whyItMatters: string;
+  phases?: RoadmapPhase[];
   scopeNote?: string;
   isInfrastructure?: boolean;
 }
@@ -15,6 +22,10 @@ export interface FinePrintItem {
   title: string;
   body: string;
 }
+
+export type OverviewParagraph =
+  | string
+  | { bold: string; text: string };
 
 export interface Proposal {
   slug: string;
@@ -31,8 +42,10 @@ export interface Proposal {
     clientName: string;
     chesterbrookTeam: string;
   };
-  overview: string[];
+  overview: OverviewParagraph[];
   roadmapItems: RoadmapItem[];
-  nextSteps: string[];
-  dontGetOverwhelmed: string;
+  onTheRadar?: { title: string; body: string }[];
+  openQuestions?: string[];
+  nextSteps?: string[];
+  dontGetOverwhelmed?: string;
 }

@@ -3,7 +3,13 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 
-export function LoginForm() {
+export function LoginForm({
+  title,
+  clientName,
+}: {
+  title: string;
+  clientName: string;
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [password, setPassword] = useState("");
@@ -40,9 +46,9 @@ export function LoginForm() {
   return (
     <main className="flex min-h-screen items-center justify-center px-6 py-12">
       <div className="w-full max-w-sm rounded-lg border border-accent/20 bg-widget p-8 shadow-card">
-        <p className="eyebrow mb-3">Chesterbrook</p>
+        <p className="eyebrow mb-3">Chesterbrook · {clientName}</p>
         <h1 className="text-[22px] font-semibold tracking-[-0.02em] text-foreground">
-          Sol-Up Engineering Roadmap
+          {title}
         </h1>
         <p className="prose-body mt-2">Enter the password to view this proposal.</p>
 

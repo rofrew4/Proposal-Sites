@@ -1,4 +1,4 @@
-import type { RoadmapItem } from "@/proposals/types";
+import type { RoadmapItem, RoadmapPhase } from "@/proposals/types";
 import { DetailBlock } from "./DetailBlock";
 import { ExpandableRow } from "./ExpandableRow";
 import { FadeIn } from "./FadeIn";
@@ -14,7 +14,7 @@ function scopeColorClass(scope: string): string {
 function ScopeKey() {
   const items = [
     { label: "Low", hours: "20+ hrs", color: "text-scope-low" },
-    { label: "Med", hours: "35+ hrs", color: "text-scope-med" },
+    { label: "Med", hours: "30+ hrs", color: "text-scope-med" },
     { label: "High", hours: "50+ hrs", color: "text-scope-high" },
   ] as const;
 
@@ -36,10 +36,12 @@ function RoadmapRowHeader({
   number,
   title,
   scope,
+  phases,
 }: {
   number: string;
   title: string;
-  scope: string;
+  scope?: string;
+  phases?: RoadmapPhase[];
 }) {
   return (
     <div className="flex flex-col gap-2 px-4 py-4 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-x-4 sm:gap-y-1">
@@ -51,11 +53,57 @@ function RoadmapRowHeader({
           {title}
         </h3>
       </div>
-      <span
-        className={`self-start font-mono text-[11px] font-semibold uppercase tracking-[0.08em] sm:self-auto ${scopeColorClass(scope)}`}
-      >
-        {scope}
-      </span>
+      {phases && phases.length > 0 ? (
+        <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 self-start sm:self-auto">
+          {phases.map((phase) => (
+            <span key={phase.label} className="whitespace-nowrap font-mono text-[11px] tracking-[0.04em]">
+              <span className="font-medium text-foreground/80">{phase.label}</span>{" "}
+              <span
+                className={`font-semibold uppercase tracking-[0.08em] ${scopeColorClass(phase.scope)}`}
+              >
+                {phase.scope}
+              </span>
+            </span>
+          ))}
+        </div>
+      ) : (
+        scope && (
+          <span
+            className={`self-start font-mono text-[11px] font-semibold uppercase tracking-[0.08em] sm:self-auto ${scopeColorClass(scope)}`}
+          >
+            {scope}
+          </span>
+        )
+      )}
+    </div>
+  );
+}
+
+function PhaseBlock({ phase }: { phase: RoadmapPhase }) {
+  const description = Array.isArray(phase.description)
+    ? phase.description
+    : [phase.description];
+
+  return (
+    <div className="border-t border-accent/10 py-3 first:border-t-0 first:pt-0">
+      <div className="mb-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <span className="text-[13px] font-semibold text-foreground">{phase.label}</span>
+        <span
+          className={`font-mono text-[11px] font-semibold uppercase tracking-[0.08em] ${scopeColorClass(phase.scope)}`}
+        >
+          {phase.scope}
+        </span>
+      </div>
+      <ul className="space-y-1">
+        {description.map((point) => (
+          <li
+            key={point.slice(0, 32)}
+            className="prose-body relative pl-3.5 before:absolute before:left-0 before:top-[0.55em] before:h-1 before:w-1 before:rounded-full before:bg-accent/50 before:content-['']"
+          >
+            {point}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -78,6 +126,7 @@ export function Roadmap({ items }: { items: RoadmapItem[] }) {
                   number={item.number}
                   title={item.title}
                   scope={item.scope}
+                  phases={item.phases}
                 />
               }
             >
@@ -102,6 +151,16 @@ export function Roadmap({ items }: { items: RoadmapItem[] }) {
               ) : null}
 
               <DetailBlock label="Why it matters">{item.whyItMatters}</DetailBlock>
+
+              {item.phases && item.phases.length > 0 && (
+                <DetailBlock label="Build">
+                  <div>
+                    {item.phases.map((phase) => (
+                      <PhaseBlock key={phase.label} phase={phase} />
+                    ))}
+                  </div>
+                </DetailBlock>
+              )}
 
               {item.scopeNote && (
                 <p className="mt-1 font-mono text-[12px] leading-relaxed text-foreground/60">

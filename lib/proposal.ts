@@ -9,7 +9,13 @@ export function getProposalSlug(): string {
   if (headerSlug) return headerSlug;
 
   const host = headers().get("host");
-  return resolveProposalSlug(host);
+  const slug = resolveProposalSlug(host);
+
+  if (!slug) {
+    notFound();
+  }
+
+  return slug;
 }
 
 export function getProposal(): Proposal {
