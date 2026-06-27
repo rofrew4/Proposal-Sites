@@ -131,7 +131,7 @@ export function Roadmap({ items }: { items: RoadmapItem[] }) {
               }
             >
             <div className="px-4 pb-2 pt-1 md:pl-[4.25rem] md:pr-5">
-              <DetailBlock label="What it is">{item.whatItIs}</DetailBlock>
+              <DetailBlock label="What we build">{item.whatItIs}</DetailBlock>
 
               {Array.isArray(item.whatItDoes) && item.whatItDoes.length > 0 ? (
                 <DetailBlock label="What it does">
