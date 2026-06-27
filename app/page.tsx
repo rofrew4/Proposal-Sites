@@ -12,8 +12,10 @@ import { OpenQuestions } from "./components/OpenQuestions";
 import { Overview } from "./components/Overview";
 import { Phase1Section } from "./components/Phase1Section";
 import { Roadmap } from "./components/Roadmap";
+import { WhyUs } from "./components/WhyUs";
 import { WorkflowRoadmap } from "./components/WorkflowRoadmap";
 import { WhoWeAre } from "./components/WhoWeAre";
+import { defaultDontGetOverwhelmed } from "@/proposals/shared";
 import { getProposal } from "@/lib/proposal";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -34,61 +36,64 @@ export default function Home() {
     <>
       <DevProposalBanner />
       <main className="doc">
-      <FadeIn>
-        <Hero proposal={proposal} />
-      </FadeIn>
-      <FadeIn>
-        <WhoWeAre />
-      </FadeIn>
-      <FadeIn>
-        <Overview paragraphs={proposal.overview} />
-      </FadeIn>
-      <FadeIn>
-        {proposal.workflow ? (
-          <WorkflowRoadmap
-            title={proposal.workflow.title}
-            steps={proposal.workflow.steps}
-            afterSteps={proposal.workflow.afterSteps}
-          />
-        ) : (
-          <Roadmap items={proposal.roadmapItems ?? []} />
+        <FadeIn>
+          <Hero proposal={proposal} />
+        </FadeIn>
+        <FadeIn>
+          <WhoWeAre />
+        </FadeIn>
+        <FadeIn>
+          <Overview paragraphs={proposal.overview} />
+        </FadeIn>
+        <FadeIn>
+          {proposal.workflow ? (
+            <>
+              <WorkflowRoadmap
+                title={proposal.workflow.title}
+                steps={proposal.workflow.steps}
+                afterSteps={proposal.workflow.afterSteps}
+              />
+              <Phase1Section content={proposal.workflow.phase1} />
+            </>
+          ) : (
+            <Roadmap items={proposal.roadmapItems ?? []} />
+          )}
+        </FadeIn>
+        {proposal.onTheRadar && proposal.onTheRadar.length > 0 && (
+          <FadeIn>
+            <OnTheRadar items={proposal.onTheRadar} />
+          </FadeIn>
         )}
-      </FadeIn>
-      {proposal.workflow && (
+        {proposal.openQuestions && proposal.openQuestions.length > 0 && (
+          <FadeIn>
+            <OpenQuestions items={proposal.openQuestions} />
+          </FadeIn>
+        )}
+        {proposal.dontGetOverwhelmed !== null && (
+          <FadeIn>
+            <DontGetOverwhelmed
+              body={proposal.dontGetOverwhelmed ?? defaultDontGetOverwhelmed}
+            />
+          </FadeIn>
+        )}
         <FadeIn>
-          <Phase1Section content={proposal.workflow.phase1} />
+          <WhyUs integrationLine={proposal.whyUsIntegration} />
         </FadeIn>
-      )}
-      {proposal.onTheRadar && proposal.onTheRadar.length > 0 && (
         <FadeIn>
-          <OnTheRadar items={proposal.onTheRadar} />
+          <HowWeWork />
         </FadeIn>
-      )}
-      {proposal.openQuestions && proposal.openQuestions.length > 0 && (
         <FadeIn>
-          <OpenQuestions items={proposal.openQuestions} />
+          <FinePrint clientName={proposal.hero.clientName} />
         </FadeIn>
-      )}
-      <FadeIn>
-        <HowWeWork />
-      </FadeIn>
-      {proposal.dontGetOverwhelmed && (
+        {proposal.nextSteps && proposal.nextSteps.length > 0 && (
+          <FadeIn>
+            <NextSteps steps={proposal.nextSteps} />
+          </FadeIn>
+        )}
         <FadeIn>
-          <DontGetOverwhelmed body={proposal.dontGetOverwhelmed} />
+          <Footer />
         </FadeIn>
-      )}
-      <FadeIn>
-        <FinePrint clientName={proposal.hero.clientName} />
-      </FadeIn>
-      {proposal.nextSteps && proposal.nextSteps.length > 0 && (
-        <FadeIn>
-          <NextSteps steps={proposal.nextSteps} />
-        </FadeIn>
-      )}
-      <FadeIn>
-        <Footer />
-      </FadeIn>
-    </main>
+      </main>
     </>
   );
 }

@@ -150,7 +150,7 @@ export function Roadmap({ items }: { items: RoadmapItem[] }) {
                 <DetailBlock label="What it does">{item.whatItDoes}</DetailBlock>
               ) : null}
 
-              <DetailBlock label="Why it matters">{item.whyItMatters}</DetailBlock>
+              <DetailBlock label="Your benefit">{item.yourBenefit}</DetailBlock>
 
               {item.phases && item.phases.length > 0 && (
                 <DetailBlock label="Build">

@@ -6,7 +6,6 @@ export function OnTheRadar({
   return (
     <section className="doc-section">
       <h2 className="doc-h2">On the Radar</h2>
-      <p className="prose-body mb-5 text-secondary">Not scoped here.</p>
 
       <ul className="space-y-4">
         {items.map((item) => (

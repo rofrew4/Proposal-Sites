@@ -1,20 +1,21 @@
 import type { FinePrintItem } from "./types";
 
-export const whoWeAre = {
-  intro:
-    "Chesterbrook is a custom AI engineering and strategy firm. We build agents, internal tools, data pipelines, and software for operators who want to move faster than off-the-shelf software lets them.",
-  whyUs: [
-    "No red tape. You talk directly to the engineers building, not an account manager who doesn't know how the software actually works.",
-    "No upsells, no shelfware. We only recommend builds with a clear time or revenue ROI.",
-    "We build around your existing systems instead of forcing change. Your stack stays where it is; we integrate around it.",
-    "We're young, fast, and accessible. Call us late, we'll pick up.",
-  ],
-};
+export const whoWeAreIntro =
+  "Chesterbrook is a custom AI consulting firm for property management and commercial real estate. We build tools for operators who want to move at a higher efficiency than their competition.";
+
+export const whyUsShared = [
+  "No upsells, no shelfware. We only recommend builds with a clear time or revenue ROI.",
+  "We're young, fast, and accessible. Call us late, we'll pick up.",
+];
+
+export function buildWhyUs(integrationLine: string): string[] {
+  return [integrationLine, ...whyUsShared];
+}
 
 export const howWeWork = [
   {
     title: "Billing",
-    body: "$110/hour, phased and approved one project at a time. Hours billed biweekly after each sync, based on actual time worked. If a phase is tracking over its estimate, we flag it before we go over, not after.",
+    body: "$110/hour, billed biweekly based on actual time worked, one project at a time. If a phase is tracking over estimate, we flag it before we go over.",
   },
   {
     title: "Communication",
@@ -26,7 +27,7 @@ export const howWeWork = [
   },
   {
     title: "Optional retainer",
-    body: "Once projects are live, most clients want a lightweight monthly retainer to keep things humming. Small fixes, jurisdictions that change their forms, platform updates that break an integration. Fully optional. We don't put it in place at the start, and we don't put it in place at all if you don't want one.",
+    body: "Most clients request to stay on a flexible retainer to handle new fixes, updates, and maintenance.",
   },
 ];
 
@@ -59,3 +60,6 @@ export function buildFinePrint(clientName: string): FinePrintItem[] {
     },
   ];
 }
+
+export const defaultDontGetOverwhelmed =
+  "No need to commit to more than one project. Start with project 01, see what it actually saves you, then decide on the next one. The goal is to free up enough of your team's time to offset several new hires.";

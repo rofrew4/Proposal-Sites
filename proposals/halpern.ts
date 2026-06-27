@@ -17,9 +17,15 @@ export const halpern: Proposal = {
     chesterbrookTeam: "Rowan Frew",
   },
   overview: [
-    "Think of lease generation as an assembly line where Susan's working every station herself. Automation puts a machine at each station, and she becomes the foreman who watches the line and steps in when something needs judgment.",
-    "The whole process lives in Airtable: intake, clause library, deal records, document status, all in one place. Susan and Matthew can see every doc in flight in Airtable, where they are in the deal process, and evaluate what's getting stuck.",
+    {
+      bold: "Your lease line depends on one person running every station by hand.",
+      text: "Intake arrives incomplete. You're building drafts manually, copy-pasting addendum language, and chasing routing, signature, and filing status across email and folders.",
+    },
+    "We put automation at each station in Airtable so your team supervises the line instead of running it. You approve Phase 1, see the savings, then decide whether to expand.",
   ],
+  whyUsIntegration:
+    "We build around Airtable and your existing lease workflow instead of forcing change. Your stack stays where it is; we integrate around it.",
+  dontGetOverwhelmed: null,
   workflow: {
     title: "Here's what changes at each step",
     steps: [
@@ -72,7 +78,7 @@ export const halpern: Proposal = {
     ],
     afterSteps: {
       bold: "Susan's new role:",
-      text: "watches the Airtable dashboard showing every doc in flight and where each one is stuck. Handles the edge cases (custom addendum language, weird deal terms, the Termination WITNESSETH lease history) and owns the clause library. When Legal changes a clause, updates one Airtable record and every future doc uses the new version. Matthew gets the workflow visibility he's looking for from day one.",
+      text: "watches the Airtable dashboard showing every doc in flight and where each one is stuck. Handles edge cases and owns the clause library. Matthew gets workflow visibility from day one.",
     },
     phase1: {
       intro: [

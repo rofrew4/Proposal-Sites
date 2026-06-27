@@ -8,8 +8,7 @@
  * 4. Set `PROPOSAL_SLUG=<slug>` in `.env.local` (copy from `.env.example`)
  * 5. Deploy with subdomain `<slug>.chesterbrookai.com`
  *
- * Shared sections (Who We Are, How We Work, Optional Retainer, Fine Print)
- * are automatic — only edit the fields in this file.
+ * Shared sections (Who We Are, Why Us, How We Work, Fine Print) are automatic.
  */
 import type { Proposal } from "./types";
 
@@ -29,18 +28,23 @@ export const template: Proposal = {
     chesterbrookTeam: "Rowan Frew & Wyatt Bracy",
   },
   overview: [
-    "First overview paragraph.",
-    "Second overview paragraph (optional — remove if not needed).",
+    {
+      bold: "You're losing time on [specific problem].",
+      text: "Describe what breaks for them day to day, in second person. Use 'you' and 'your'.",
+    },
+    "Explain what you build to fix it, phased, with their approval before each project starts.",
   ],
+  whyUsIntegration:
+    "We build around [their core system] instead of forcing change. Your stack stays where it is; we integrate around it.",
   roadmapItems: [
     {
       id: "project-01",
       number: "01",
       title: "Project Title",
       scope: "LOW-MED",
-      whatItIs: "One-sentence summary.",
+      whatItIs: "One-sentence summary of what the tool does.",
       whatItDoes: ["Bullet one.", "Bullet two."],
-      whyItMatters: "Why this project matters to the client.",
+      yourBenefit: "You [plain client outcome in 1-2 sentences].",
       scopeNote: "Optional scope note.",
     },
   ],
@@ -50,14 +54,10 @@ export const template: Proposal = {
       body: "Brief description of something worth watching but not scoped yet.",
     },
   ],
-  openQuestions: [
-    "First open question before final numbers.",
-  ],
+  openQuestions: ["First open question before final numbers."],
   nextSteps: [
     "Client picks which project to start.",
     "Chesterbrook sends the SOW.",
     "Kickoff begins after the SOW is signed.",
   ],
-  dontGetOverwhelmed:
-    "Start with project 01. See what it saves, then decide on the next one.",
 };

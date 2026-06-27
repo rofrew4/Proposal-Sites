@@ -17,21 +17,16 @@ export const pmi: Proposal = {
     chesterbrookTeam: "Rowan Frew",
   },
   overview: [
-    "You're further along on AI than most firms your size: Yardi Virtuoso beta, your team's testing daily, and you know exactly where the time sinks are. From our conversation, three gaps matter most.",
     {
-      bold: "Reputation is a blind spot.",
-      text: "Bad reviews land across a dozen sites and you only hear about them by accident.",
+      bold: "You're missing things you should be catching early.",
+      text: "Bad reviews land across a dozen sites and you only hear about them by accident. You're sourcing new management opportunities by hand, and it's slow. And Yardi's AI layer may price you out of tools that should save you money, not break even.",
     },
-    {
-      bold: "Sourcing management opportunities is manual.",
-      text: "You grow by taking over under-managed properties, but finding them and the owners behind them is slow and done by hand.",
-    },
-    {
-      bold: "Yardi's AI layer may price you out.",
-      text: "Virtuoso's cost is undisclosed and you don't want AI to be cost-neutral. The opening is more affordable agents that work alongside Yardi, not on top of Yardi's pricing.",
-    },
-    "We identified 5 possible projects that could be helpful, ranked by priority. Project 1 and Project 3 need no Yardi access and can start immediately.",
+    "We build affordable automation that works alongside Yardi, ranked by what matters most to you. You approve each project before anything gets built.",
   ],
+  whyUsIntegration:
+    "We build around Yardi and your existing systems instead of forcing change. Your stack stays where it is; we integrate around it.",
+  dontGetOverwhelmed:
+    "No need to commit to more than one project. Start with project 01, see what it actually saves you, then decide on the next one. The goal is to free up enough of your team's time to offset several new hires.",
   roadmapItems: [
     {
       id: "reputation-monitoring",
@@ -45,8 +40,8 @@ export const pmi: Proposal = {
         "Because we only need to read reviews, the aggregator covers every site including Google, and we skip Google's API approval process entirely.",
         "Pass-through data cost: review aggregator + Claude API, roughly $20-75/month at your scale, billed at cost.",
       ],
-      whyItMatters:
-        "This is the tool you said you wanted most: an agent that scrubs the reputation sites and tells you what to pay attention to. MyNewHome, Rent.com, ApartmentRatings, Google, and Nextdoor are exactly the channels we'd cover. Reputation drives leasing; prospects read these sites before they tour. Right now you only hear about a bad review by accident, often weeks late. This makes it systematic: every community, every site, every negative review caught fast and put in front of the right person while it still matters.",
+      yourBenefit:
+        "You hear about negative reviews the day they land across every community and site that matters, while your team can still respond in time.",
       phases: [
         {
           label: "Phase 1",
@@ -79,8 +74,8 @@ export const pmi: Proposal = {
         "Phase 1 (foundation): stand up the export pipeline, the read-only NL query layer, and a first set of anomaly flags on one division.",
         "Phase 2 (production): handles multiple Yardi entities and chart-of-accounts structures, query validation and result verification, tuned anomaly baselines per property type, scheduled refresh, multi-user access, audit trail.",
       ],
-      whyItMatters:
-        "You don't want AI to be cost-neutral, and you're worried Virtuoso will price you out. This gives your team the ask-your-data-a-question / get-told-what-needs-attention capability without Yardi's pricing, on data you already own. For an ESOP with audit-grade accounting, the self-surfacing exception flags double as an internal-controls aid.",
+      yourBenefit:
+        "Your team asks plain-English questions of your operational data and gets proactive flags without relying on Yardi's AI pricing.",
       scopeNote:
         "Dependency: confirm your Yardi instance can export reports to SFTP/CSV. Python, Postgres, and the Claude API are the only metered cost beyond the data.",
     },
@@ -98,8 +93,8 @@ export const pmi: Proposal = {
         "Each opportunity ranked 0-100, owner contact skip-traced for phone and email, queued for outreach.",
         "Pass-through data cost: parcel/owner data (Regrid or ReportAll) is quote-based, modest for PA-only scope. Distress feed (PropertyRadar) tiers run $119-$599/month; realistically ~$250-$600/month for usable coverage and API access. Skip-tracing: a few dollars per thousand records.",
       ],
-      whyItMatters:
-        'This is your play, in your words: find a poorly managed property, identify the owner, confirm they\'re an individual (not an LLC or management entity), and reach out: "we noticed six violations this year, your rents look under market, let\'s talk about PMI managing this." This is the tool that builds that pipeline.',
+      yourBenefit:
+        "Your team gets a ranked queue of individual property owners to approach about taking over under-managed assets.",
       scopeNote:
         "Later phase: cut the distress subscription with targeted county scraping. Philadelphia (OpenDataPhilly) and Allegheny/Pittsburgh publish distress data openly. Down the line we can scrape these directly for priority markets. Doing it for all 67 counties isn't worth it.",
     },
@@ -118,8 +113,8 @@ export const pmi: Proposal = {
         "Queue the owner for outreach, deduped against Project 3's pipeline.",
         "Pass-through data cost: listing data + RentCast (free tier to ~$50/month) + shared parcel API. Modest.",
       ],
-      whyItMatters:
-        "A competitor's chronic vacancy is the clearest possible signal of an unhappy owner. This finds them systematically and arms your team with specifics. We've built competitor-listing scrapers that build a live lead database for other property managers.",
+      yourBenefit:
+        "Your team finds competitor vacancies systematically and reaches owners with specific, data-backed outreach angles.",
       scopeNote:
         "Lower scope if built alongside Project 3, reuses the owner-resolution and outreach-queue layers.",
     },
@@ -134,8 +129,8 @@ export const pmi: Proposal = {
         "Early-warning calendar over your own data so nothing slips on affordable-housing compliance dates.",
         "Scoped properly once Project 2's data pipeline is in place.",
       ],
-      whyItMatters:
-        "Affordable-housing compliance is unforgiving on dates and a missed recertification is expensive.",
+      yourBenefit:
+        "Your team sees upcoming affordable-housing compliance deadlines before anything slips.",
       scopeNote:
         "Deliberately out of scope: automated validation of compliance (judging whether an income calc is right, whether rent is under the AMI ceiling, whether a file passes). That's high-liability work where trustworthy enough is the whole product. Separate, carefully-scoped engagement.",
     },
@@ -143,17 +138,11 @@ export const pmi: Proposal = {
   onTheRadar: [
     {
       title: "Customer-service / FAQ agent",
-      body: "24/7 answers to high-volume tenant questions, your biggest day-to-day pain. Strong off-the-shelf tools exist here, so we'd likely help you buy rather than build.",
+      body: "Your biggest day-to-day pain. Strong off-the-shelf options exist, so we'd likely help you buy rather than build.",
     },
     {
       title: "Full platform replacement",
-      body: "If PMI ever wanted off Yardi entirely, we can look into this more in the future. Different scale of engagement, but the door's open.",
+      body: "Moving off Yardi entirely. Out of scope here, but worth a conversation if timing changes.",
     },
-  ],
-  openQuestions: [
-    "Managed-communities roster. Can your team export the communities you manage (name, address, assigned manager)?",
-    "Reputation scope. How many distinct communities are we monitoring? Do you want scattered single-family homes included (address-level, often no review listing, low signal) or just the multifamily and affordable communities?",
-    "Target markets. Which PA markets/counties matter most?",
-    "Yardi exports. Can your Yardi instance schedule report exports to SFTP/CSV, and which reports cover the operational and financial data you'd want to query?",
   ],
 };

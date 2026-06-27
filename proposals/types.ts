@@ -11,7 +11,7 @@ export interface RoadmapItem {
   scope?: string;
   whatItIs: string;
   whatItDoes: string | string[];
-  whyItMatters: string;
+  yourBenefit: string;
   phases?: RoadmapPhase[];
   scopeNote?: string;
   isInfrastructure?: boolean;
@@ -66,10 +66,11 @@ export interface Proposal {
     chesterbrookTeam: string;
   };
   overview: OverviewParagraph[];
+  whyUsIntegration: string;
   roadmapItems?: RoadmapItem[];
   workflow?: WorkflowSection;
   onTheRadar?: { title: string; body: string }[];
   openQuestions?: string[];
   nextSteps?: string[];
-  dontGetOverwhelmed?: string;
+  dontGetOverwhelmed?: string | null;
 }
