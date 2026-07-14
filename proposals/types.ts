@@ -9,6 +9,8 @@ export interface RoadmapItem {
   number: string;
   title: string;
   scope?: string;
+  /** Flat price shown in the row header instead of a Low/Med/High scope. */
+  cost?: string;
   whatItIs: string;
   whatItDoes: string | string[];
   yourBenefit: string;
@@ -73,4 +75,8 @@ export interface Proposal {
   openQuestions?: string[];
   nextSteps?: string[];
   dontGetOverwhelmed?: string | null;
+  /** Overrides shared How We Work cards when set. */
+  howWeWork?: { title: string; body: string }[];
+  /** Overrides Fine Print payment-terms body when set. */
+  paymentTerms?: string;
 }

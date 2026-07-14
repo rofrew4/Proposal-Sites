@@ -1,11 +1,15 @@
-import { howWeWork } from "@/proposals/shared";
+import { howWeWork as defaultHowWeWork } from "@/proposals/shared";
 
-export function HowWeWork() {
+export function HowWeWork({
+  items = defaultHowWeWork,
+}: {
+  items?: { title: string; body: string }[];
+}) {
   return (
     <section className="doc-section">
       <h2 className="doc-h2">How We Work</h2>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
-        {howWeWork.map((item) => (
+        {items.map((item) => (
           <div
             key={item.title}
             className="border-t-2 border-accent/25 pt-4"

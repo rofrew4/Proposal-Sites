@@ -134,6 +134,20 @@
     @apply pb-2 pt-3;
   }
 
+  .expandable-row--static .row-summary {
+    @apply cursor-default;
+  }
+
+  .expandable-row--static .row-number {
+    @apply text-accent;
+  }
+
+  @media (hover: hover) {
+    .expandable-row--static:hover .row-summary {
+      @apply bg-accent/5;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;

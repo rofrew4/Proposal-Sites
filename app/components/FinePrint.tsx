@@ -2,8 +2,18 @@ import { buildFinePrint } from "@/proposals/shared";
 import { ExpandableRow } from "./ExpandableRow";
 import { FadeIn } from "./FadeIn";
 
-export function FinePrint({ clientName }: { clientName: string }) {
-  const finePrintItems = buildFinePrint(clientName);
+export function FinePrint({
+  clientName,
+  paymentTerms,
+}: {
+  clientName: string;
+  paymentTerms?: string;
+}) {
+  const finePrintItems = buildFinePrint(clientName).map((item) =>
+    item.id === "payment" && paymentTerms
+      ? { ...item, body: paymentTerms }
+      : item,
+  );
 
   return (
     <section className="doc-section">

@@ -11,6 +11,14 @@ function scopeColorClass(scope: string): string {
   return "text-scope-low";
 }
 
+function hasHourlyScopes(items: RoadmapItem[]): boolean {
+  return items.some(
+    (item) =>
+      Boolean(item.scope) ||
+      (item.phases && item.phases.length > 0),
+  );
+}
+
 function ScopeKey() {
   const items = [
     { label: "Low", hours: "20+ hrs", color: "text-scope-low" },
@@ -36,11 +44,13 @@ function RoadmapRowHeader({
   number,
   title,
   scope,
+  cost,
   phases,
 }: {
   number: string;
   title: string;
   scope?: string;
+  cost?: string;
   phases?: RoadmapPhase[];
 }) {
   return (
@@ -66,6 +76,10 @@ function RoadmapRowHeader({
             </span>
           ))}
         </div>
+      ) : cost ? (
+        <span className="self-start font-mono text-[13px] font-semibold tabular-nums tracking-[0.04em] text-accent sm:self-auto">
+          {cost}
+        </span>
       ) : (
         scope && (
           <span
@@ -108,67 +122,108 @@ function PhaseBlock({ phase }: { phase: RoadmapPhase }) {
   );
 }
 
+function RoadmapItemBody({ item }: { item: RoadmapItem }) {
+  return (
+    <div className="px-4 pb-2 pt-1 md:pl-[4.25rem] md:pr-5">
+      <DetailBlock label="What we build">{item.whatItIs}</DetailBlock>
+
+      {Array.isArray(item.whatItDoes) && item.whatItDoes.length > 0 ? (
+        <DetailBlock label="What it does">
+          <ul className="space-y-1">
+            {item.whatItDoes.map((point) => (
+              <li
+                key={point.slice(0, 32)}
+                className="relative pl-3.5 before:absolute before:left-0 before:top-[0.55em] before:h-1 before:w-1 before:rounded-full before:bg-accent/50 before:content-['']"
+              >
+                {point}
+              </li>
+            ))}
+          </ul>
+        </DetailBlock>
+      ) : typeof item.whatItDoes === "string" && item.whatItDoes ? (
+        <DetailBlock label="What it does">{item.whatItDoes}</DetailBlock>
+      ) : null}
+
+      <DetailBlock label="Your benefit">{item.yourBenefit}</DetailBlock>
+
+      {item.phases && item.phases.length > 0 && (
+        <DetailBlock label="Build">
+          <div>
+            {item.phases.map((phase) => (
+              <PhaseBlock key={phase.label} phase={phase} />
+            ))}
+          </div>
+        </DetailBlock>
+      )}
+
+      {item.scopeNote && (
+        <p className="mt-1 font-mono text-[12px] leading-relaxed text-foreground/60">
+          Scope note: {item.scopeNote}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function StaticRoadmapItem({ item }: { item: RoadmapItem }) {
+  return (
+    <div
+      id={item.id}
+      className={[
+        "expandable-row expandable-row--roadmap expandable-row--static",
+        item.isInfrastructure ? "expandable-row--infrastructure" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
+      <div className="row-summary bg-accent/5">
+        <RoadmapRowHeader
+          number={item.number}
+          title={item.title}
+          scope={item.scope}
+          cost={item.cost}
+          phases={item.phases}
+        />
+      </div>
+      <div className="row-body opacity-100" style={{ maxHeight: "none" }}>
+        <RoadmapItemBody item={item} />
+      </div>
+    </div>
+  );
+}
+
 export function Roadmap({ items }: { items: RoadmapItem[] }) {
+  const showScopeKey = hasHourlyScopes(items);
+  const alwaysOpen = items.length === 1;
+
   return (
     <section id="roadmap" className="doc-section">
       <h2 className="doc-h2">The Roadmap</h2>
-      <ScopeKey />
+      {showScopeKey && <ScopeKey />}
 
       <div className="divide-y divide-accent/10 rounded-lg border border-accent/20 bg-widget shadow-card">
         {items.map((item) => (
           <FadeIn key={item.id}>
-            <ExpandableRow
-              id={item.id}
-              variant="roadmap"
-              infrastructure={item.isInfrastructure}
-              header={
-                <RoadmapRowHeader
-                  number={item.number}
-                  title={item.title}
-                  scope={item.scope}
-                  phases={item.phases}
-                />
-              }
-            >
-            <div className="px-4 pb-2 pt-1 md:pl-[4.25rem] md:pr-5">
-              <DetailBlock label="What we build">{item.whatItIs}</DetailBlock>
-
-              {Array.isArray(item.whatItDoes) && item.whatItDoes.length > 0 ? (
-                <DetailBlock label="What it does">
-                  <ul className="space-y-1">
-                    {item.whatItDoes.map((point) => (
-                      <li
-                        key={point.slice(0, 32)}
-                        className="relative pl-3.5 before:absolute before:left-0 before:top-[0.55em] before:h-1 before:w-1 before:rounded-full before:bg-accent/50 before:content-['']"
-                      >
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-                </DetailBlock>
-              ) : typeof item.whatItDoes === "string" && item.whatItDoes ? (
-                <DetailBlock label="What it does">{item.whatItDoes}</DetailBlock>
-              ) : null}
-
-              <DetailBlock label="Your benefit">{item.yourBenefit}</DetailBlock>
-
-              {item.phases && item.phases.length > 0 && (
-                <DetailBlock label="Build">
-                  <div>
-                    {item.phases.map((phase) => (
-                      <PhaseBlock key={phase.label} phase={phase} />
-                    ))}
-                  </div>
-                </DetailBlock>
-              )}
-
-              {item.scopeNote && (
-                <p className="mt-1 font-mono text-[12px] leading-relaxed text-foreground/60">
-                  Scope note: {item.scopeNote}
-                </p>
-              )}
-            </div>
-          </ExpandableRow>
+            {alwaysOpen ? (
+              <StaticRoadmapItem item={item} />
+            ) : (
+              <ExpandableRow
+                id={item.id}
+                variant="roadmap"
+                infrastructure={item.isInfrastructure}
+                header={
+                  <RoadmapRowHeader
+                    number={item.number}
+                    title={item.title}
+                    scope={item.scope}
+                    cost={item.cost}
+                    phases={item.phases}
+                  />
+                }
+              >
+                <RoadmapItemBody item={item} />
+              </ExpandableRow>
+            )}
           </FadeIn>
         ))}
       </div>

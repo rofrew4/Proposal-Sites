@@ -80,10 +80,13 @@ export default function Home() {
           <WhyUs integrationLine={proposal.whyUsIntegration} />
         </FadeIn>
         <FadeIn>
-          <HowWeWork />
+          <HowWeWork items={proposal.howWeWork} />
         </FadeIn>
         <FadeIn>
-          <FinePrint clientName={proposal.hero.clientName} />
+          <FinePrint
+            clientName={proposal.hero.clientName}
+            paymentTerms={proposal.paymentTerms}
+          />
         </FadeIn>
         {proposal.nextSteps && proposal.nextSteps.length > 0 && (
           <FadeIn>
