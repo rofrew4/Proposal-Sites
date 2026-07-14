@@ -45,8 +45,8 @@ export default function Home() {
         <FadeIn>
           <Overview paragraphs={proposal.overview} />
         </FadeIn>
-        <FadeIn>
-          {proposal.workflow ? (
+        {proposal.workflow ? (
+          <FadeIn>
             <>
               <WorkflowRoadmap
                 title={proposal.workflow.title}
@@ -55,10 +55,14 @@ export default function Home() {
               />
               <Phase1Section content={proposal.workflow.phase1} />
             </>
-          ) : (
+          </FadeIn>
+        ) : (proposal.roadmapItems?.length ?? 0) === 1 ? (
+          <Roadmap items={proposal.roadmapItems ?? []} />
+        ) : (
+          <FadeIn>
             <Roadmap items={proposal.roadmapItems ?? []} />
-          )}
-        </FadeIn>
+          </FadeIn>
+        )}
         {proposal.onTheRadar && proposal.onTheRadar.length > 0 && (
           <FadeIn>
             <OnTheRadar items={proposal.onTheRadar} />

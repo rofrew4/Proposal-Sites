@@ -142,6 +142,11 @@
     @apply text-accent;
   }
 
+  .expandable-row--static .row-body {
+    max-height: none !important;
+    @apply overflow-visible opacity-100;
+  }
+
   @media (hover: hover) {
     .expandable-row--static:hover .row-summary {
       @apply bg-accent/5;

@@ -46,19 +46,23 @@ function RoadmapRowHeader({
   scope,
   cost,
   phases,
+  showNumber = true,
 }: {
   number: string;
   title: string;
   scope?: string;
   cost?: string;
   phases?: RoadmapPhase[];
+  showNumber?: boolean;
 }) {
   return (
     <div className="flex flex-col gap-2 px-4 py-4 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-x-4 sm:gap-y-1">
       <div className="flex min-w-0 items-baseline gap-3">
-        <span className="row-number shrink-0 font-mono text-[13px] font-medium tabular-nums text-accent/45 transition-colors duration-[250ms]">
-          [ {number} ]
-        </span>
+        {showNumber && (
+          <span className="row-number shrink-0 font-mono text-[13px] font-medium tabular-nums text-accent/45 transition-colors duration-[250ms]">
+            [ {number} ]
+          </span>
+        )}
         <h3 className="text-[17px] font-semibold leading-tight tracking-[-0.01em] text-foreground">
           {title}
         </h3>
@@ -122,9 +126,21 @@ function PhaseBlock({ phase }: { phase: RoadmapPhase }) {
   );
 }
 
-function RoadmapItemBody({ item }: { item: RoadmapItem }) {
+function RoadmapItemBody({
+  item,
+  indent = true,
+}: {
+  item: RoadmapItem;
+  indent?: boolean;
+}) {
   return (
-    <div className="px-4 pb-2 pt-1 md:pl-[4.25rem] md:pr-5">
+    <div
+      className={
+        indent
+          ? "px-4 pb-2 pt-1 md:pl-[4.25rem] md:pr-5"
+          : "px-4 pb-4 pt-1"
+      }
+    >
       <DetailBlock label="What we build">{item.whatItIs}</DetailBlock>
 
       {Array.isArray(item.whatItDoes) && item.whatItDoes.length > 0 ? (
@@ -183,10 +199,11 @@ function StaticRoadmapItem({ item }: { item: RoadmapItem }) {
           scope={item.scope}
           cost={item.cost}
           phases={item.phases}
+          showNumber={false}
         />
       </div>
-      <div className="row-body opacity-100" style={{ maxHeight: "none" }}>
-        <RoadmapItemBody item={item} />
+      <div className="row-body">
+        <RoadmapItemBody item={item} indent={false} />
       </div>
     </div>
   );
@@ -202,30 +219,34 @@ export function Roadmap({ items }: { items: RoadmapItem[] }) {
       {showScopeKey && <ScopeKey />}
 
       <div className="divide-y divide-accent/10 rounded-lg border border-accent/20 bg-widget shadow-card">
-        {items.map((item) => (
-          <FadeIn key={item.id}>
-            {alwaysOpen ? (
-              <StaticRoadmapItem item={item} />
-            ) : (
-              <ExpandableRow
-                id={item.id}
-                variant="roadmap"
-                infrastructure={item.isInfrastructure}
-                header={
-                  <RoadmapRowHeader
-                    number={item.number}
-                    title={item.title}
-                    scope={item.scope}
-                    cost={item.cost}
-                    phases={item.phases}
-                  />
-                }
-              >
-                <RoadmapItemBody item={item} />
-              </ExpandableRow>
-            )}
-          </FadeIn>
-        ))}
+        {items.map((item) => {
+          const content = alwaysOpen ? (
+            <StaticRoadmapItem item={item} />
+          ) : (
+            <ExpandableRow
+              id={item.id}
+              variant="roadmap"
+              infrastructure={item.isInfrastructure}
+              header={
+                <RoadmapRowHeader
+                  number={item.number}
+                  title={item.title}
+                  scope={item.scope}
+                  cost={item.cost}
+                  phases={item.phases}
+                />
+              }
+            >
+              <RoadmapItemBody item={item} />
+            </ExpandableRow>
+          );
+
+          return alwaysOpen ? (
+            <div key={item.id}>{content}</div>
+          ) : (
+            <FadeIn key={item.id}>{content}</FadeIn>
+          );
+        })}
       </div>
     </section>
   );
