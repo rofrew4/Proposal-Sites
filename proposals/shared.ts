@@ -4,7 +4,6 @@ export const whoWeAreIntro =
   "Chesterbrook is a custom AI consulting firm for property management and commercial real estate. We build tools for operators who want to move at a higher efficiency than their competition.";
 
 export const whyUsShared = [
-  "No upsells, no shelfware. We only recommend builds with a clear time or revenue ROI.",
   "We're young, fast, and accessible. Call us late, we'll pick up.",
 ];
 
