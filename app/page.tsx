@@ -65,7 +65,10 @@ export default function Home() {
         )}
         {proposal.onTheRadar && proposal.onTheRadar.length > 0 && (
           <FadeIn>
-            <OnTheRadar items={proposal.onTheRadar} />
+            <OnTheRadar
+              items={proposal.onTheRadar}
+              title={proposal.onTheRadarTitle}
+            />
           </FadeIn>
         )}
         {proposal.openQuestions && proposal.openQuestions.length > 0 && (

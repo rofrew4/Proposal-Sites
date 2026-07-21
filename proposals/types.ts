@@ -4,6 +4,14 @@ export interface RoadmapPhase {
   description: string | string[];
 }
 
+export interface RoadmapDetailSection {
+  label: string;
+  text?: string;
+  bullets?: string[];
+  /** Render bullets as an ordered list. */
+  numbered?: boolean;
+}
+
 export interface RoadmapItem {
   id: string;
   number: string;
@@ -12,7 +20,9 @@ export interface RoadmapItem {
   /** Flat price shown in the row header instead of a Low/Med/High scope. */
   cost?: string;
   whatItIs: string;
-  whatItDoes: string | string[];
+  whatItDoes?: string | string[];
+  /** Extra labeled sections between what-it-does and your-benefit. */
+  detailSections?: RoadmapDetailSection[];
   yourBenefit: string;
   phases?: RoadmapPhase[];
   scopeNote?: string;
@@ -71,7 +81,9 @@ export interface Proposal {
   whyUsIntegration: string;
   roadmapItems?: RoadmapItem[];
   workflow?: WorkflowSection;
-  onTheRadar?: { title: string; body: string }[];
+  onTheRadar?: { title: string; body?: string }[];
+  /** Overrides the On the Radar section heading when set. */
+  onTheRadarTitle?: string;
   openQuestions?: string[];
   nextSteps?: string[];
   dontGetOverwhelmed?: string | null;

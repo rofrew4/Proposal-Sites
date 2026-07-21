@@ -126,6 +126,33 @@ function PhaseBlock({ phase }: { phase: RoadmapPhase }) {
   );
 }
 
+function BulletList({
+  points,
+  numbered = false,
+}: {
+  points: string[];
+  numbered?: boolean;
+}) {
+  const ListTag = numbered ? "ol" : "ul";
+
+  return (
+    <ListTag className={numbered ? "list-decimal space-y-1 pl-5" : "space-y-1"}>
+      {points.map((point) => (
+        <li
+          key={point.slice(0, 48)}
+          className={
+            numbered
+              ? "prose-body pl-1"
+              : "relative pl-3.5 before:absolute before:left-0 before:top-[0.55em] before:h-1 before:w-1 before:rounded-full before:bg-accent/50 before:content-['']"
+          }
+        >
+          {point}
+        </li>
+      ))}
+    </ListTag>
+  );
+}
+
 function RoadmapItemBody({
   item,
   indent = true,
@@ -133,6 +160,12 @@ function RoadmapItemBody({
   item: RoadmapItem;
   indent?: boolean;
 }) {
+  const whatItDoesPoints = Array.isArray(item.whatItDoes)
+    ? item.whatItDoes
+    : item.whatItDoes
+      ? [item.whatItDoes]
+      : [];
+
   return (
     <div
       className={
@@ -143,22 +176,20 @@ function RoadmapItemBody({
     >
       <DetailBlock label="What we build">{item.whatItIs}</DetailBlock>
 
-      {Array.isArray(item.whatItDoes) && item.whatItDoes.length > 0 ? (
+      {whatItDoesPoints.length > 0 && (
         <DetailBlock label="What it does">
-          <ul className="space-y-1">
-            {item.whatItDoes.map((point) => (
-              <li
-                key={point.slice(0, 32)}
-                className="relative pl-3.5 before:absolute before:left-0 before:top-[0.55em] before:h-1 before:w-1 before:rounded-full before:bg-accent/50 before:content-['']"
-              >
-                {point}
-              </li>
-            ))}
-          </ul>
+          <BulletList points={whatItDoesPoints} />
         </DetailBlock>
-      ) : typeof item.whatItDoes === "string" && item.whatItDoes ? (
-        <DetailBlock label="What it does">{item.whatItDoes}</DetailBlock>
-      ) : null}
+      )}
+
+      {item.detailSections?.map((section) => (
+        <DetailBlock key={section.label} label={section.label}>
+          {section.text && <p className={section.bullets?.length ? "mb-2" : undefined}>{section.text}</p>}
+          {section.bullets && section.bullets.length > 0 && (
+            <BulletList points={section.bullets} numbered={section.numbered} />
+          )}
+        </DetailBlock>
+      ))}
 
       <DetailBlock label="Your benefit">{item.yourBenefit}</DetailBlock>
 
