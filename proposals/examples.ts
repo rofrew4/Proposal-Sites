@@ -23,7 +23,7 @@ export const examples: Showcase = {
       number: "01",
       title: "Operations & Workflow Automation",
       summary:
-        "We identify where AI fits in your team's workflow, build custom tools that replace SaaS and automate the work that eats your day, and train employees on how to use modern AI tools.",
+        "We map where AI fits in your team's workflow, build custom tools that replace SaaS and clear the busywork, and train your people on modern AI.",
       highlights: [
         {
           title: "Meeting intelligence & live voice agents",
