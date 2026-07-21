@@ -11,7 +11,7 @@ export const examples: Showcase = {
   },
   hero: {
     label: "Project Examples",
-    title: "Chesterbrook AI — What We've Built",
+    title: "Chesterbrook AI - What We've Built",
     subtitle: "Custom AI software for real estate",
   },
   intro:

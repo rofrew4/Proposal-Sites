@@ -135,7 +135,7 @@ export function ShowcasePage({ site }: { site: Showcase }) {
     <main className="doc">
       <FadeIn>
         <header className="doc-section">
-          <h1 className="hero-title uppercase text-foreground">
+          <h1 className="hero-title text-foreground">
             {site.hero.title}
           </h1>
           <p className="mt-3 text-[17px] italic leading-snug text-accent">
