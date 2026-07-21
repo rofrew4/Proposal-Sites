@@ -1,8 +1,9 @@
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
-import { getProposalBySlug } from "@/proposals/registry";
+import { getSiteBySlug } from "@/proposals/registry";
 import { resolveProposalSlug } from "@/lib/proposal-slug";
-import type { Proposal } from "@/proposals/types";
+import type { Proposal, Site } from "@/proposals/types";
+import { isShowcase } from "@/proposals/types";
 
 export function getProposalSlug(): string {
   const headerSlug = headers().get("x-proposal-slug");
@@ -18,18 +19,34 @@ export function getProposalSlug(): string {
   return slug;
 }
 
-export function getProposal(): Proposal {
+export function getSite(): Site {
   const slug = getProposalSlug();
-  const proposal = getProposalBySlug(slug);
+  const site = getSiteBySlug(slug);
 
-  if (!proposal) {
+  if (!site) {
     notFound();
   }
 
-  return proposal;
+  return site;
 }
 
-export function getProposalPassword(slug: string): string {
-  const proposal = getProposalBySlug(slug);
-  return process.env.PROPOSAL_PASSWORD ?? proposal?.password ?? "changeme";
+export function getProposal(): Proposal {
+  const site = getSite();
+
+  if (isShowcase(site)) {
+    notFound();
+  }
+
+  return site;
+}
+
+export function getProposalPassword(slug: string): string | null {
+  const site = getSiteBySlug(slug);
+  if (!site) return "changeme";
+  if (site.password === null) return null;
+  return process.env.PROPOSAL_PASSWORD ?? site.password;
+}
+
+export function siteRequiresAuth(site: Site): boolean {
+  return site.password !== null;
 }

@@ -12,25 +12,38 @@ import { OpenQuestions } from "./components/OpenQuestions";
 import { Overview } from "./components/Overview";
 import { Phase1Section } from "./components/Phase1Section";
 import { Roadmap } from "./components/Roadmap";
+import { ShowcasePage } from "./components/ShowcasePage";
 import { WhyUs } from "./components/WhyUs";
 import { WorkflowRoadmap } from "./components/WorkflowRoadmap";
 import { WhoWeAre } from "./components/WhoWeAre";
 import { defaultDontGetOverwhelmed } from "@/proposals/shared";
-import { getProposal } from "@/lib/proposal";
+import { getSite } from "@/lib/proposal";
+import { isShowcase } from "@/proposals/types";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const proposal = getProposal();
+  const site = getSite();
 
   return {
-    title: proposal.meta.title,
-    description: proposal.meta.description,
+    title: site.meta.title,
+    description: site.meta.description,
   };
 }
 
 export const dynamic = "force-dynamic";
 
 export default function Home() {
-  const proposal = getProposal();
+  const site = getSite();
+
+  if (isShowcase(site)) {
+    return (
+      <>
+        <DevProposalBanner />
+        <ShowcasePage site={site} />
+      </>
+    );
+  }
+
+  const proposal = site;
 
   return (
     <>

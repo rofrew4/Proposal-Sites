@@ -16,7 +16,7 @@ export async function POST(request: Request) {
   const slug = getProposalSlug();
   const expected = getProposalPassword(slug);
 
-  if (password !== expected) {
+  if (expected === null || password !== expected) {
     return NextResponse.json({ error: "Incorrect password" }, { status: 401 });
   }
 

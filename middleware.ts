@@ -5,7 +5,7 @@ import {
   isLocalDevHost,
   resolveProposalSlug,
 } from "@/lib/proposal-slug";
-import { getProposalBySlug } from "@/proposals/registry";
+import { getSiteBySlug } from "@/proposals/registry";
 
 const AUTH_COOKIE = "proposal-auth";
 
@@ -47,10 +47,15 @@ export function middleware(request: NextRequest) {
     return withProposalSlug(NextResponse.next(), slug);
   }
 
-  const proposal = getProposalBySlug(slug);
+  const site = getSiteBySlug(slug);
 
-  if (!proposal) {
+  if (!site) {
     return new NextResponse("Proposal not found", { status: 404 });
+  }
+
+  // Public sites (e.g. Project Examples) skip the password gate.
+  if (site.password === null) {
+    return withProposalSlug(NextResponse.next(), slug);
   }
 
   const expectedPassword = getProposalPassword(slug);

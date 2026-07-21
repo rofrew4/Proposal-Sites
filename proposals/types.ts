@@ -92,3 +92,52 @@ export interface Proposal {
   /** Overrides Fine Print payment-terms body when set. */
   paymentTerms?: string;
 }
+
+export interface ShowcaseProject {
+  id: string;
+  title: string;
+  clients?: string;
+  body: string;
+  bullets?: string[];
+}
+
+export interface ShowcaseCategory {
+  id: string;
+  number: string;
+  title: string;
+  summary: string;
+  /** Short blips on the overview page before the detail sections. */
+  highlights: { title: string; body: string }[];
+  /** Longer description shown above the projects in the detail section. */
+  detailIntro: string;
+  projects: ShowcaseProject[];
+}
+
+export interface Showcase {
+  kind: "showcase";
+  slug: string;
+  /** Public sites use null — no login gate. */
+  password: null;
+  meta: {
+    title: string;
+    description: string;
+  };
+  hero: {
+    label: string;
+    title: string;
+    subtitle: string;
+  };
+  intro: string;
+  categories: ShowcaseCategory[];
+  detailLeadIn: string;
+  cta: {
+    title: string;
+    body: string;
+  };
+}
+
+export type Site = Proposal | Showcase;
+
+export function isShowcase(site: Site): site is Showcase {
+  return "kind" in site && site.kind === "showcase";
+}
